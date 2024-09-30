@@ -5,6 +5,7 @@ services:
     ports:
       - "80:80"
     volumes:
+      - ./userdata:/var/www/user
       - ./webdata:/var/www/html
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
@@ -27,7 +28,7 @@ services:
       - "21:21"
       - "30000-30009:30000-30009"  # Passive FTP ports
     volumes:
-      - ./webdata/u:/home/ftpusers
+      - ./userdata:/home/ftpusers
       - ./ftp/users.csv:/config/users.csv
     environment:
       FTP_USER_CSV: /config/users.csv

@@ -16,11 +16,12 @@ if [ -f "$USER_CSV" ]; then
         else
             echo "Creating FTP user: $username with password $password"
             # Create home directory
-            mkdir -p /home/ftpusers/$username
-            chown ftpuser:ftpuser /home/ftpusers/$username
+            mkdir -p /home/ftpusers/$username/www
+
+            chown -R ftpuser:ftpgroup /home/ftpusers/$username
 
             # Create Pure-FTPd user
-            echo -e "$password\n$password" | pure-pw useradd $username -u ftpuser -d /home/ftpusers/$username/ -m
+            echo -e "$password\n$password" | pure-pw useradd $username -u ftpuser -d /home/ftpusers/$username/ -N 50 -m
             echo "Done."
         fi
     done
