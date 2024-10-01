@@ -1,4 +1,13 @@
-HOST=csb.fransblauw.rocks
+DEFAULT_HOST="csb.fransblauw.rocks"
+
+if [ -z "$1" ]; then
+    echo "Using default host: $DEFAULT_HOST"
+    HOST=$DEFAULT_HOST
+else
+    echo "Using host: $1"
+    HOST=$1
+fi
+
 mkdir -p ./private/letsencrypt
 mkdir -p ./private/certificates
 certbot certonly --standalone --register-unsafely-without-email --agree-tos --non-interactive --config-dir ./private/letsencrypt/ --work-dir ./private/letsencrypt/ -d $HOST

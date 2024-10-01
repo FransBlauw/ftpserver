@@ -13,7 +13,8 @@ then
     pure-pw mkdb "$PURE_DB" -f "$PASSWD_FILE"
 fi
 
-if [ -e /etc/ssl/private/pure-ftpd.pem ]
+# if [ -e /etc/ssl/private/pure-ftpd.pem ]
+if [ $ENABLE_TLS -eq "1" ]
 then
     echo "Enabling TLS..."
     PURE_FTPD_FLAGS="$PURE_FTPD_FLAGS --tls=1 "
@@ -37,14 +38,13 @@ if [ -f "$USER_CSV" ]; then
             chown -R ftpuser:ftpgroup /home/ftpusers/$username
 
             # Create Pure-FTPd user
-            echo -e "$password\n$password" | pure-pw useradd $username -u ftpuser -d /home/ftpusers/$username/ -N 50 -m -f "$PASSWD_FILE" -F "$PURE_DB"
-            echo "Done."
+            echo -e "$password\n$password" | pure-pw useradd $username -u ftpuser -d /home/ftpusers/$username/ -N 50 -m -f "$PASSWD_FILE" -F "$PURE_DB" 2>&1 > /dev/null
         fi
     done
 fi
 
 # Start Pure-FTPd in foreground
 echo "Starting Pure-FTPd..."
-exec pure-ftpd -l puredb:$PURE_DB -E -j -R -p 30000:30009 -P $PUBLICHOST $PURE_FTPD_FLAGS
+exec pure-ftpd -l puredb:$PURE_DB -E -j -R -p 30000:30099 -P $PUBLICHOST $PURE_FTPD_FLAGS
 # ./run.sh -l puredb:/etc/pure-ftpd/pureftpd.pdb -E -j -R -P $PUBLICHOST
 
