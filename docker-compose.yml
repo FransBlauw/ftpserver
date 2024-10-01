@@ -1,6 +1,6 @@
 services:
   nginx:
-    image: nginx:latest
+    image: nginx:mainline-alpine
     container_name: nginx
     ports:
       - "80:80"
@@ -16,7 +16,7 @@ services:
       - app-network
 
   php:
-    image: php:8.0-fpm
+    image: php:8.0-fpm-alpine
     container_name: php-fpm
     volumes:
       - ./userdata:/var/www/user
