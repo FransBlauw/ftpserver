@@ -19,6 +19,7 @@ services:
     image: php:8.0-fpm
     container_name: php-fpm
     volumes:
+      - ./userdata:/var/www/user
       - ./webdata:/var/www/html
     networks:
       - app-network
