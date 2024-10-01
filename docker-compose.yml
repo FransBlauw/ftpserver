@@ -34,7 +34,7 @@ services:
       - ./userdata:/home/ftpusers
       - ./ftp/users.csv:/config/users.csv
       # Enable the following volume to enable SSL
-      - ./private/certificates:/etc/ssl/private
+      # - ./private/certificates:/etc/ssl/private
     environment:
       PUBLICHOST: "csb.fransblauw.rocks"
       FTP_USER_CSV: /config/users.csv
@@ -42,9 +42,6 @@ services:
       - nginx
     networks:
       - app-network
-
-# volumes:
-#   webdata:
 
 networks:
   app-network:
