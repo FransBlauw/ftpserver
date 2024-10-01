@@ -32,6 +32,7 @@ services:
       - ./userdata:/home/ftpusers
       - ./ftp/users.csv:/config/users.csv
     environment:
+      PUBLICHOST: "csb.fransblauw.rocks"
       FTP_USER_CSV: /config/users.csv
     depends_on:
       - nginx

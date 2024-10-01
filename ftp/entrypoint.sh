@@ -45,6 +45,6 @@ fi
 
 # Start Pure-FTPd in foreground
 echo "Starting Pure-FTPd..."
-exec pure-ftpd -l puredb:$PURE_DB -E -j -R -p 30000:30009 $PURE_FTPD_FLAGS
+exec pure-ftpd -l puredb:$PURE_DB -E -j -R -p 30000:30009 -P $PUBLICHOST $PURE_FTPD_FLAGS
 # ./run.sh -l puredb:/etc/pure-ftpd/pureftpd.pdb -E -j -R -P $PUBLICHOST
 
