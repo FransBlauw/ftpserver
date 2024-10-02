@@ -1,4 +1,4 @@
-DEFAULT_HOST="fransblauw.rocks"
+DEFAULT_HOST="bytethebasics.xyz"
 
 if [ -z "$1" ]; then
     echo "Using default host: $DEFAULT_HOST"

@@ -37,7 +37,7 @@ services:
       - ./private/certificates:/etc/ssl/private
     environment:
       # Update PUBLICHOST with your domain name
-      PUBLICHOST: "csb.fransblauw.rocks"
+      PUBLICHOST: "bytethebasics.xyz"
       FTP_USER_CSV: /config/users.csv
       ENABLE_TLS: 0
     depends_on:
