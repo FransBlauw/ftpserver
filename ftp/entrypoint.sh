@@ -13,6 +13,14 @@ then
     pure-pw mkdb "$PURE_DB" -f "$PASSWD_FILE"
 fi
 
+if [ -z "$FTP_PASSIVE_PORTS" ]
+then
+    echo "Passive Ports not set. Using default 30000:30010"
+    FTP_PASSIVE_PORTS="30000:30010"
+fi
+
+echo "Binding to passive ports: $FTP_PASSIVE_PORTS"
+
 # if [ -e /etc/ssl/private/pure-ftpd.pem ]
 if [ $ENABLE_TLS -eq "1" ]
 then
@@ -45,6 +53,4 @@ fi
 
 # Start Pure-FTPd in foreground
 echo "Starting Pure-FTPd..."
-exec pure-ftpd -l puredb:$PURE_DB -E -j -R -p 30000:30099 -P $PUBLICHOST $PURE_FTPD_FLAGS
-# ./run.sh -l puredb:/etc/pure-ftpd/pureftpd.pdb -E -j -R -P $PUBLICHOST
-
+exec pure-ftpd -l puredb:$PURE_DB -E -j -R -p "$FTP_PASSIVE_PORTS" -P $PUBLICHOST $PURE_FTPD_FLAGS
