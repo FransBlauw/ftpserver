@@ -3,6 +3,7 @@ FROM stilliard/pure-ftpd:latest
 
 # Copy the entrypoint script
 COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 # Default command
 CMD ["/entrypoint.sh"]

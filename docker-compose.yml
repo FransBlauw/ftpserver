@@ -29,7 +29,8 @@ services:
     container_name: pure-ftpd
     ports:
       - "21:21"
-      - "30000-30010:30000-30010"  # Passive FTP ports
+      # Passive FTP ports range, must match the FTP_PASSIVE_PORTS environment variable
+      - "30000-30010:30000-30010"  
     volumes:
       - ./ftpdata:/etc/pure-ftpd/passwd
       - ./userdata:/home/ftpusers
@@ -39,6 +40,7 @@ services:
       # Update PUBLICHOST with your domain name
       PUBLICHOST: "bytethebasics.xyz"
       FTP_USER_CSV: /config/users.csv
+      # Update FTP_PASSIVE_PORTS with your passive ports range
       FTP_PASSIVE_PORTS: 30000:30010
       ENABLE_TLS: 0
     depends_on:
